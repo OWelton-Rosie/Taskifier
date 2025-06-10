@@ -1,5 +1,5 @@
-# Random Words Generator
-This is the repo for <a href="https://random-words-generator.pages.dev/">https://homework-planner.pages.dev/</a>.
+# Homework planner/tracker 
+This is the repo for <a href="https://homework-planner.pages.dev">https://homework-planner.pages.dev/</a>.
 
 ## Features
 - Ability to create and list an unlimited amoutn of tasks.
