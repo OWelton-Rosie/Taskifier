@@ -56,9 +56,16 @@ li {
   flex-direction: column;
 }
 
-li.done {
+/* Only apply strikethrough and fade to text parts of completed tasks */
+li.done .task-header,
+li.done .task-meta {
   text-decoration: line-through;
   opacity: 0.6;
+}
+
+li.done .task-actions {
+  text-decoration: none;
+  opacity: 1;
 }
 
 .priority-low { border-left-color: #66bb6a; }
