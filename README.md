@@ -10,7 +10,7 @@ This is the repo for <a href="https://homework-planner.pages.dev">https://homewo
 ## Running the project locally
 Run the command:
 ```
-git clone [https://github.com/OWelton-Rosie/Random-Words-Generato](https://github.com/OWelton-Rosie/homework-planner)r
+git clone https://github.com/OWelton-Rosie/homework-planner
 ```
 
 This project has no dependencies.
