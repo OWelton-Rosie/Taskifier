@@ -4,8 +4,11 @@ const searchInput = document.getElementById("search");
 const filterCategory = document.getElementById("filter-category");
 const sortBySelect = document.getElementById("sort-by");
 const exportBtn = document.getElementById("export-tasks");
+const submitBtn = taskForm.querySelector("button[type='submit']");
 
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+let isEditing = false;
+let editIndex = null;
 
 const priorityMap = {
   high: 1,
@@ -38,39 +41,18 @@ function renderTasks() {
     const prioB = priorityMap[b.priority?.toLowerCase()] || 99;
 
     switch (sortOption) {
-      case "due-asc":
-        if (!dateA && !dateB) return 0;
-        if (!dateA) return 1;
-        if (!dateB) return -1;
-        return dateA - dateB;
-
-      case "due-desc":
-        if (!dateA && !dateB) return 0;
-        if (!dateA) return -1;
-        if (!dateB) return 1;
-        return dateB - dateA;
-
-      case "priority-asc":
-        return prioA - prioB;
-
-      case "priority-desc":
-        return prioB - prioA;
-
-      case "name-asc":
-        return a.name.localeCompare(b.name);
-
-      case "name-desc":
-        return b.name.localeCompare(a.name);
-
-      default:
-        return 0;
+      case "due-asc": return (dateA || Infinity) - (dateB || Infinity);
+      case "due-desc": return (dateB || -Infinity) - (dateA || -Infinity);
+      case "priority-asc": return prioA - prioB;
+      case "priority-desc": return prioB - prioA;
+      case "name-asc": return a.name.localeCompare(b.name);
+      case "name-desc": return b.name.localeCompare(a.name);
+      default: return 0;
     }
   });
 
   sortedTasks.forEach(task => {
-    // Defensive: some tasks might have no category - treat as empty string
     const taskCategory = task.category || "";
-
     if (
       (task.name.toLowerCase().includes(search) || taskCategory.toLowerCase().includes(search)) &&
       (categoryFilterValue === "" || taskCategory === categoryFilterValue)
@@ -85,7 +67,6 @@ function renderTasks() {
         ? Math.ceil((new Date(task.deadline) - new Date()) / (1000 * 60 * 60 * 24))
         : null;
 
-      // Get the original index in the main tasks array for correct button actions
       const originalIndex = tasks.indexOf(task);
 
       li.innerHTML = `
@@ -133,10 +114,8 @@ function updateCategoryFilter(categories) {
     filterCategory.appendChild(option);
   });
 
-  if (currentValue && (currentValue === "" || categories.has(currentValue))) {
+  if (categories.has(currentValue)) {
     filterCategory.value = currentValue;
-  } else {
-    filterCategory.value = "";
   }
 }
 
@@ -161,9 +140,9 @@ function editTask(index) {
   document.getElementById("task-deadline").value = task.deadline;
   document.getElementById("task-priority").value = task.priority;
 
-  tasks.splice(index, 1);
-  saveTasks();
-  renderTasks();
+  isEditing = true;
+  editIndex = index;
+  submitBtn.textContent = "Update Task";
 }
 
 taskForm.addEventListener("submit", e => {
@@ -177,12 +156,20 @@ taskForm.addEventListener("submit", e => {
     done: false
   };
 
-  if (newTask.name) {
+  if (!newTask.name) return;
+
+  if (isEditing && editIndex !== null) {
+    tasks[editIndex] = newTask;
+    isEditing = false;
+    editIndex = null;
+    submitBtn.textContent = "Add Task";
+  } else {
     tasks.push(newTask);
-    saveTasks();
-    renderTasks();
-    taskForm.reset();
   }
+
+  saveTasks();
+  renderTasks();
+  taskForm.reset();
 });
 
 searchInput.addEventListener("input", renderTasks);
