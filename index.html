@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Homework Planner</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./style.css">
   <link rel="icon" type="image/x-icon" href="./favicon.jpeg">
 
   <style>
@@ -30,22 +30,30 @@
     <br>
     <h1>Add a new task</h1>
 
-    <form id="task-form">
-      <input id="task-name" type="text" placeholder="Task name" required>
-      <input id="task-category" type="text" placeholder="Category (eg, English)">
-      <input id="task-deadline" type="date">
-      <select id="task-priority" name="priority">
-        <option value="">None</option>
-        <option value="high">High</option>
-        <option value="medium">Medium</option>
-        <option value="low">Low</option>
-      </select>
-      <button type="submit">Add Task</button>
-    </form>
+
+<!-- Form to add a new task -->
+<form id="task-form">
+  <input id="task-name" type="text" placeholder="Task name" required>
+  <input id="task-category" type="text" placeholder="Category (eg, English)">
+  <input id="task-deadline" type="date">
+
+  <select id="task-priority" name="priority">
+    <option value="" disabled selected hidden>Select priority level</option>
+    <option value="">None</option>
+    <option value="high">High</option>
+    <option value="medium">Medium</option>
+    <option value="low">Low</option>
+  </select>
+  
+
+  <button type="submit">Add Task</button>
+</form>
+
 
     <hr>
     <h1>Search for a task</h1>
 
+    <!-- Controls for searching, filtering, and sorting tasks -->
     <div class="controls">
       <input id="search" type="text" placeholder="Search tasks...">
       <select id="filter-category">
