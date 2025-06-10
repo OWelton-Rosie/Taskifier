@@ -7,61 +7,76 @@
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/x-icon" href="./favicon.jpeg">
 
+  <style>
+    .main-content {
+      display: none;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Homework planner/tracker</h1>
-  </header>
 
-  <br>
-  <h1>Add a new task</h1>
+  <noscript>
+    <div style="background: #ffcccb; padding: 1em; text-align: center; font-weight: bold;">
+      JavaScript is disabled in your browser. Please enable it to use the Homework Planner.
+    </div>
+  </noscript>
 
-  <form id="task-form">
-    <input id="task-name" type="text" placeholder="Task name" required>
-    <input id="task-category" type="text" placeholder="Category (eg, English)">
-    <input id="task-deadline" type="date">
-    <select id="task-priority" name="priority">
-      <option value="">None</option>
-      <option value="high">High</option>
-      <option value="medium">Medium</option>
-      <option value="low">Low</option>
-    </select>
-    
-        <button type="submit">Add Task</button>
-  </form>
+  <div class="main-content">
+    <header>
+      <h1>Homework planner/tracker</h1>
+    </header>
 
-  <hr>
-  <h1>Search for a task</h1>
+    <br>
+    <h1>Add a new task</h1>
 
+    <form id="task-form">
+      <input id="task-name" type="text" placeholder="Task name" required>
+      <input id="task-category" type="text" placeholder="Category (eg, English)">
+      <input id="task-deadline" type="date">
+      <select id="task-priority" name="priority">
+        <option value="">None</option>
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
+      </select>
+      <button type="submit">Add Task</button>
+    </form>
 
-  <div class="controls">
-    <input id="search" type="text" placeholder="Search tasks...">
-    <select id="filter-category">
-      <option value="" selected>All Categories</option>
-    </select>
-    <select id="sort-by">
-      <option value="due-asc">Due date (closest first)</option>
-      <option value="due-desc">Due date (furthest first)</option>
-      <option value="priority-asc">Priority (high to low)</option>
-      <option value="priority-desc">Priority (low to high)</option>
-      <option value="name-asc">Name (A to Z)</option>
-      <option value="name-desc">Name (Z to A)</option>
-    </select>
+    <hr>
+    <h1>Search for a task</h1>
+
+    <div class="controls">
+      <input id="search" type="text" placeholder="Search tasks...">
+      <select id="filter-category">
+        <option value="" selected>All Categories</option>
+      </select>
+      <select id="sort-by">
+        <option value="due-asc">Due date (closest first)</option>
+        <option value="due-desc">Due date (furthest first)</option>
+        <option value="priority-asc">Priority (high to low)</option>
+        <option value="priority-desc">Priority (low to high)</option>
+        <option value="name-asc">Name (A to Z)</option>
+        <option value="name-desc">Name (Z to A)</option>
+      </select>
+    </div>
+
+    <hr>
+    <button id="export-tasks">Download Tasks</button>
+    <br><br>
+    <h1>All tasks</h1>
+
+    <ul id="task-list"></ul>
+
+    <footer>
+      <a href="https://github.com/OWelton-Rosie/homework-planner" target="_blank">GitHub</a>. Written by 
+      <a href="https://owelton-rosie.pages.dev" target="_blank">Oscar Welton-Rosie</a>.
+    </footer>
   </div>
-  <hr>
-  <button id="export-tasks">Download Tasks</button>
-  <br>
-  <br>
-  <h1>All tasks</h1>
 
-
-
-  <ul id="task-list"></ul>
-
-
-
-  <footer><a href="https://github.com/OWelton-Rosie/homework-planner" target="_blank">GitHub</a>. Written by <a href="https://owelton-rosie.pages.dev" target="_blank">Oscar Welton-Rosie</a>.</footer>
-
+  <script>
+    // JS is enabled, show the main content
+    document.querySelector('.main-content').style.display = 'block';
+  </script>
   <script src="index.js"></script>
 </body>
 </html>
