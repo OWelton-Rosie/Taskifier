@@ -21,10 +21,11 @@
     display: block;
     margin-top: 2rem;
     text-align: left;
-    color: #007acc;
+    color: #36b1bd;
     text-decoration: none;
   }
 
   a.back-link:hover {
+    color: #0f98ba;
     text-decoration: underline;
   }
