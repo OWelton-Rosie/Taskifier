@@ -1,0 +1,30 @@
+.faq-item {
+    background: white;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  }
+
+  .faq-item h2 {
+    margin-top: 0;
+    font-size: 1.2rem;
+    color: black;
+  }
+
+  .faq-item p {
+    margin: 0.5rem 0 0;
+    color: black;
+  }
+
+  a.back-link {
+    display: block;
+    margin-top: 2rem;
+    text-align: left;
+    color: #007acc;
+    text-decoration: none;
+  }
+
+  a.back-link:hover {
+    text-decoration: underline;
+  }
