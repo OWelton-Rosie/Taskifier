@@ -35,6 +35,11 @@ function renderTasks() {
   updateCategoryFilter(categories);
 
   let sortedTasks = [...tasks].sort((a, b) => {
+    // Always push completed tasks to the bottom
+    if (a.done !== b.done) {
+      return a.done ? 1 : -1;
+    }
+
     const dateA = a.deadline ? new Date(a.deadline) : null;
     const dateB = b.deadline ? new Date(b.deadline) : null;
     const prioA = priorityMap[a.priority?.toLowerCase()] || 99;
@@ -93,7 +98,7 @@ function renderTasks() {
     emptyMessage.style.textAlign = "center";
     emptyMessage.style.fontStyle = "italic";
     emptyMessage.style.color = "#555";
-    emptyMessage.innerHTML = "🎉 Woohoo, no tasks left!";
+    emptyMessage.textContent = search ? `No tasks found for "${search}"` : "🎉 Woohoo, no tasks left!";
     taskList.appendChild(emptyMessage);
   }
 }
