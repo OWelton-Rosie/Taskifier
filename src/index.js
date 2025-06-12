@@ -109,7 +109,7 @@ function updateCategoryFilter(categories) {
 
   const allOption = document.createElement("option");
   allOption.value = "";
-  allOption.textContent = "All Categories";
+  allOption.textContent = "All categories";
   filterCategory.appendChild(allOption);
 
   categories.forEach(cat => {
