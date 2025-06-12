@@ -147,7 +147,7 @@ function editTask(index) {
 
   isEditing = true;
   editIndex = index;
-  submitBtn.textContent = "Update Task";
+  submitBtn.textContent = "Update task";
 
   // Scroll to the top of the page
   window.scrollTo({ top: 0, behavior: "smooth" });
