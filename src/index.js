@@ -27,7 +27,7 @@ function renderTasks() {
   const categoryFilterValue = filterCategory.value;
   const sortOption = sortBySelect.value;
 
-const categories = new Set();
+  const categories = new Set();
   tasks.forEach(task => {
     if (task.category) categories.add(task.category);
   });
@@ -148,6 +148,9 @@ function editTask(index) {
   isEditing = true;
   editIndex = index;
   submitBtn.textContent = "Update Task";
+
+  // Scroll to the top of the page
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 taskForm.addEventListener("submit", e => {
