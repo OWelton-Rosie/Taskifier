@@ -27,7 +27,7 @@ function renderTasks() {
   const categoryFilterValue = filterCategory.value;
   const sortOption = sortBySelect.value;
 
-  const categories = new Set();
+const categories = new Set();
   tasks.forEach(task => {
     if (task.category) categories.add(task.category);
   });
@@ -84,7 +84,7 @@ function renderTasks() {
           Priority: ${task.priority || "None"}
         </div>
         <div class="task-actions">
-          <button onclick="toggleDone(${originalIndex})">${task.done ? "Undo" : "Mark as completed"}</button>
+          <button onclick="toggleDone(${originalIndex})">${task.done ? "Mark as incomplete" : "Mark as completed"}</button>
           <button onclick="editTask(${originalIndex})">Edit</button>
           <button onclick="deleteTask(${originalIndex})">Delete</button>
         </div>
