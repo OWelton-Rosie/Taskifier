@@ -85,8 +85,8 @@ function renderTasks() {
         </div>
         <div class="task-actions">
           <button onclick="toggleDone(${originalIndex})">${task.done ? "Mark as incomplete" : "Mark as completed"}</button>
-          <button onclick="editTask(${originalIndex})">Edit</button>
-          <button onclick="deleteTask(${originalIndex})">Delete</button>
+          <button onclick="editTask(${originalIndex})">Edit task</button>
+          <button onclick="deleteTask(${originalIndex})">Delete task</button>
         </div>
       `;
       taskList.appendChild(li);
