@@ -17,7 +17,8 @@ const priorityMap = {
   low: 3
 };
 
-// Select a random "no tasks left" message
+// Select a random "no tasks left" message from messages.json
+// If the contents of messages.json cannot be fetched , use a default message
 function getRandomNoTasksMessage() {
   if (!noTasksMessages.length) return "🎉 No tasks left!";
   const index = Math.floor(Math.random() * noTasksMessages.length);
