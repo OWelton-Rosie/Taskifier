@@ -9,12 +9,20 @@ const submitBtn = taskForm.querySelector("button[type='submit']");
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 let isEditing = false;
 let editIndex = null;
+let noTasksMessages = [];
 
 const priorityMap = {
   high: 1,
   medium: 2,
   low: 3
 };
+
+// Select a random "no tasks left" message
+function getRandomNoTasksMessage() {
+  if (!noTasksMessages.length) return "🎉 No tasks left!";
+  const index = Math.floor(Math.random() * noTasksMessages.length);
+  return noTasksMessages[index];
+}
 
 function saveTasks() {
   localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -35,10 +43,7 @@ function renderTasks() {
   updateCategoryFilter(categories);
 
   let sortedTasks = [...tasks].sort((a, b) => {
-    // Always push completed tasks to the bottom
-    if (a.done !== b.done) {
-      return a.done ? 1 : -1;
-    }
+    if (a.done !== b.done) return a.done ? 1 : -1;
 
     const dateA = a.deadline ? new Date(a.deadline) : null;
     const dateB = b.deadline ? new Date(b.deadline) : null;
@@ -98,7 +103,9 @@ function renderTasks() {
     emptyMessage.style.textAlign = "center";
     emptyMessage.style.fontStyle = "italic";
     emptyMessage.style.color = "#555";
-    emptyMessage.textContent = search ? `No tasks found for "${search}"` : "🎉 Woohoo, no tasks left!";
+    emptyMessage.textContent = search
+      ? `No tasks found for "${search}"`
+      : getRandomNoTasksMessage();
     taskList.appendChild(emptyMessage);
   }
 }
@@ -149,7 +156,6 @@ function editTask(index) {
   editIndex = index;
   submitBtn.textContent = "Update task";
 
-  // Scroll to the top of the page
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
@@ -212,4 +218,14 @@ function exportTasks() {
 
 exportBtn.addEventListener("click", exportTasks);
 
-renderTasks();
+// Fetch external messages and render after loaded
+fetch('messages.json')
+  .then(response => response.json())
+  .then(data => {
+    noTasksMessages = data.noTasksMessages || [];
+    renderTasks();
+  })
+  .catch(err => {
+    console.warn("Could not load messages.json, using default message.");
+    renderTasks();
+  });
