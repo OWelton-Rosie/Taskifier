@@ -21,7 +21,7 @@ http://localhost:8000
 
 **Or:** 
 
-If you're using VSCode, install the [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) extension, then right-click on `index.html` and select "Open with Liver Server"
+If you're using VSCode, install the [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) extension, then right-click on `index.html` and select "Open with Live Server"
 
 
 
