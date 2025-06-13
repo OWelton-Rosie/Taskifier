@@ -15,12 +15,7 @@ git clone https://github.com/Owelton-Rosie/homework-planner
 Due to security restrictions, browsers will not load the custom "no tasks left" messages (found in [`messages.json`](https://github.com/OWelton-Rosie/homework-planner/blob/main/src/messages.json)). To get around this, either:
 
 ```
-# Navigate to the project directory
-cd homework-planner
-```
-
-```
-# Use python to create the server and run index.html locally
+# Use python to create the server and run index.html locally (requires Python to be installed on your machine)
 python3 -m http.server
 ```
 Then navigate to: 
