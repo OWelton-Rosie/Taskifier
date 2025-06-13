@@ -19,9 +19,14 @@ Due to security restrictions, browsers will not load the custom "no tasks left" 
 # Use python to create the server and run `index.html` locally
 python3 -m http.server
 ```
+Then navigate to 
+
+```
+http://localhost:8000
+```
 
 **Or:** 
-If you're using VSCode, install the [https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer](Live Server) extension, then right-click on `index.html` and select "Open with Liver Server"
+If you're using VSCode, install the [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) extension, then right-click on `index.html` and select "Open with Liver Server"
 
 
 This project has no dependencies.
