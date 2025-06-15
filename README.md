@@ -17,17 +17,14 @@ git clone https://github.com/OWelton-Rosie/homework-planner
 ```
 cd homework-planner
 ```
-
 ```
-# Use python to create the server and run index.html locally (requires Python to be installed)
 python3 -m http.server
 ```
 Then navigate to: 
-```
-http://localhost:8000
-```
 
-**Or:** 
+http://localhost:8000
+
+### Option 2: using Live Server (VSCode only)
 
 If you're using VSCode, install the [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) extension, then right-click on `index.html` and select "Open with Live Server"
 
