@@ -11,7 +11,8 @@ This is the repo for <a href="https://homework-planner.pages.dev">https://homewo
 Due to security restrictions, browsers will not load the custom "no tasks left" messages (found in [`messages.json`](https://github.com/OWelton-Rosie/homework-planner/blob/main/src/messages.json)). To get around this, either:
 
 ### Option 1: create the server with python
-```git clone https://github.com/OWelton-Rosie/homework-planner
+```
+git clone https://github.com/OWelton-Rosie/homework-planner
 ```
 ```
 cd homework-planner
