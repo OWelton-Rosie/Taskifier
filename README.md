@@ -28,7 +28,7 @@ python -m http.server
 
 Then navigate to: 
 
-http://localhost:8000
+http://localhost:8000/src
 
 ### Option 2: using Live Server (VSCode only)
 
