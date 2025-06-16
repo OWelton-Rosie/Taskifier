@@ -30,7 +30,7 @@ Then navigate to:
 
 http://localhost:8000/src
 
-### Option 2: using Live Server (VSCode only)
+### Option 2: using Live Server (VS Code only)
 
 If you're using VSCode, install the [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) extension, then right-click on `index.html` and select "Open with Live Server"
 
