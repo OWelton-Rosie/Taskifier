@@ -5,6 +5,7 @@ const filterCategory = document.getElementById("filter-category");
 const sortBySelect = document.getElementById("sort-by");
 const exportBtn = document.getElementById("export-tasks");
 const submitBtn = taskForm.querySelector("button[type='submit']");
+const cancelBtn = document.getElementById("cancel-edit");
 
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 let isEditing = false;
@@ -18,7 +19,6 @@ const priorityMap = {
 };
 
 // Select a random "no tasks left" message from messages.json
-// If the contents of messages.json cannot be fetched , use a default message
 function getRandomNoTasksMessage() {
   if (!noTasksMessages.length) return "🎉 No tasks left!";
   const index = Math.floor(Math.random() * noTasksMessages.length);
@@ -156,8 +156,17 @@ function editTask(index) {
   isEditing = true;
   editIndex = index;
   submitBtn.textContent = "Update task";
+  cancelBtn.style.display = "inline-block";
 
   window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function cancelEdit() {
+  isEditing = false;
+  editIndex = null;
+  submitBtn.textContent = "Add Task";
+  taskForm.reset();
+  cancelBtn.style.display = "none";
 }
 
 taskForm.addEventListener("submit", e => {
@@ -178,6 +187,7 @@ taskForm.addEventListener("submit", e => {
     isEditing = false;
     editIndex = null;
     submitBtn.textContent = "Add Task";
+    cancelBtn.style.display = "none";
   } else {
     tasks.push(newTask);
   }
@@ -187,6 +197,7 @@ taskForm.addEventListener("submit", e => {
   taskForm.reset();
 });
 
+cancelBtn.addEventListener("click", cancelEdit);
 searchInput.addEventListener("input", renderTasks);
 filterCategory.addEventListener("change", renderTasks);
 sortBySelect.addEventListener("change", renderTasks);
