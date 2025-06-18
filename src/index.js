@@ -6,6 +6,8 @@ const sortBySelect = document.getElementById("sort-by");
 const exportBtn = document.getElementById("export-tasks");
 const submitBtn = taskForm.querySelector("button[type='submit']");
 const cancelBtn = document.getElementById("cancel-edit");
+const noTasksMessageBox = document.getElementById("no-tasks-message");
+const endOfListMessage = document.getElementById("end-of-list-message");
 
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 let isEditing = false;
@@ -18,11 +20,22 @@ const priorityMap = {
   low: 3
 };
 
-// Select a random "no tasks left" message from messages.json
 function getRandomNoTasksMessage() {
   if (!noTasksMessages.length) return "🎉 No tasks left!";
   const index = Math.floor(Math.random() * noTasksMessages.length);
   return noTasksMessages[index];
+}
+
+function applyMessageStyle(el, text) {
+  el.style.textAlign = "center";
+  el.style.fontStyle = "italic";
+  el.style.color = "#555";
+  el.textContent = text;
+}
+
+function clearMessage(el) {
+  el.textContent = "";
+  el.removeAttribute("style");
 }
 
 function saveTasks() {
@@ -31,6 +44,9 @@ function saveTasks() {
 
 function renderTasks() {
   taskList.innerHTML = "";
+  clearMessage(noTasksMessageBox);
+  clearMessage(endOfListMessage);
+
   let visibleCount = 0;
   const search = searchInput.value.toLowerCase();
   const categoryFilterValue = filterCategory.value;
@@ -99,15 +115,17 @@ function renderTasks() {
     }
   });
 
-  if (visibleCount === 0) {
-    const emptyMessage = document.createElement("li");
-    emptyMessage.style.textAlign = "center";
-    emptyMessage.style.fontStyle = "italic";
-    emptyMessage.style.color = "#555";
-    emptyMessage.textContent = search
+  const allTasksComplete = tasks.length > 0 && tasks.every(task => task.done);
+
+  if (visibleCount === 0 || allTasksComplete) {
+    const msg = search
       ? `No tasks found for "${search}"`
       : getRandomNoTasksMessage();
-    taskList.appendChild(emptyMessage);
+    applyMessageStyle(noTasksMessageBox, msg);
+  }
+
+  if (visibleCount > 0 && !allTasksComplete) {
+    applyMessageStyle(endOfListMessage, "📦 Looks like you've reached the end.");
   }
 }
 
@@ -230,7 +248,6 @@ function exportTasks() {
 
 exportBtn.addEventListener("click", exportTasks);
 
-// Fetch external messages and render after loaded
 fetch('messages.json')
   .then(response => response.json())
   .then(data => {
