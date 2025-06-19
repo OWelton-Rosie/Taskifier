@@ -90,9 +90,17 @@ function renderTasks() {
       li.classList.add(`priority-${task.priority?.toLowerCase() || "none"}`);
       if (task.done) li.classList.add("done");
 
-      const daysLeft = task.deadline
-        ? Math.ceil((new Date(task.deadline) - new Date()) / (1000 * 60 * 60 * 24))
+      const dateObj = task.deadline ? new Date(task.deadline) : null;
+      const daysLeft = dateObj
+        ? Math.ceil((dateObj - new Date()) / (1000 * 60 * 60 * 24))
         : null;
+
+      const deadlineText = dateObj
+        ? `Due ${dateObj.toLocaleString(undefined, {
+            dateStyle: "medium",
+            timeStyle: "short"
+          })} (${daysLeft} day${daysLeft === 1 ? '' : 's'} left)`
+        : "No deadline";
 
       const originalIndex = tasks.indexOf(task);
 
@@ -102,8 +110,8 @@ function renderTasks() {
           <span>${taskCategory || "No category"}</span>
         </div>
         <div class="task-meta">
-          ${task.deadline ? `Due ${task.deadline} (${daysLeft} day${daysLeft === 1 ? '' : 's'} left)` : "No deadline"} |
-          Priority: ${task.priority || "None"}
+          <span class="deadline">${deadlineText}</span>
+          <span class="priority">${task.priority ? task.priority.charAt(0).toUpperCase() + task.priority.slice(1) : "None"}</span>
         </div>
         <div class="task-actions">
           <button onclick="toggleDone(${originalIndex})">${task.done ? "Mark as incomplete" : "Mark as completed"}</button>
@@ -168,7 +176,11 @@ function editTask(index) {
   const task = tasks[index];
   document.getElementById("task-name").value = task.name;
   document.getElementById("task-category").value = task.category;
-  document.getElementById("task-deadline").value = task.deadline;
+
+  const [datePart, timePart] = task.deadline?.split("T") || ["", ""];
+  document.getElementById("task-deadline").value = datePart;
+  document.getElementById("task-deadline-time").value = timePart || "";
+
   document.getElementById("task-priority").value = task.priority;
 
   isEditing = true;
@@ -190,15 +202,22 @@ function cancelEdit() {
 taskForm.addEventListener("submit", e => {
   e.preventDefault();
 
+  const name = document.getElementById("task-name").value.trim();
+  const category = document.getElementById("task-category").value.trim();
+  const date = document.getElementById("task-deadline").value;
+  const time = document.getElementById("task-deadline-time").value;
+  const deadline = date && time ? `${date}T${time}` : date || "";
+  const priority = document.getElementById("task-priority").value.trim().toLowerCase();
+
+  if (!name) return;
+
   const newTask = {
-    name: document.getElementById("task-name").value.trim(),
-    category: document.getElementById("task-category").value.trim(),
-    deadline: document.getElementById("task-deadline").value,
-    priority: document.getElementById("task-priority").value.trim().toLowerCase(),
+    name,
+    category,
+    deadline,
+    priority,
     done: false
   };
-
-  if (!newTask.name) return;
 
   if (isEditing && editIndex !== null) {
     tasks[editIndex] = newTask;
