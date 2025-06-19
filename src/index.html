@@ -30,27 +30,26 @@
     <br>
     <h1>Add a new task</h1>
 
+    <!-- Form to add a new task -->
+    <form id="task-form">
+      <input id="task-name" type="text" placeholder="Task name" required>
+      <input id="task-category" type="text" placeholder="Category (e.g., English)">
+      
+      <input id="task-deadline" type="date">
 
-<!-- Form to add a new task -->
-<form id="task-form">
-  <input id="task-name" type="text" placeholder="Task name" required>
-  <input id="task-category" type="text" placeholder="Category (eg, English)">
-  <input id="task-deadline" type="date">
+      <input id="task-deadline-time" type="time">
 
-  <select id="task-priority" name="priority">
-    <option value="" disabled selected hidden>Select priority level</option>
-    <option value="">None</option>
-    <option value="high">High</option>
-    <option value="medium">Medium</option>
-    <option value="low">Low</option>
-  </select>
-  
+      <select id="task-priority" name="priority">
+        <option value="" disabled selected hidden>Select priority level</option>
+        <option value="">None</option>
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
+      </select>
 
-  <button type="submit">Add task</button>
-  <button type="button" id="cancel-edit" style="display: none;">Cancel</button>
-
-</form>
-
+      <button type="submit">Add task</button>
+      <button type="button" id="cancel-edit" style="display: none;">Cancel</button>
+    </form>
 
     <hr>
     <h1>Search for a task</h1>
@@ -76,22 +75,17 @@
     <br><br>
     <h1>All tasks</h1>
 
-
     <div id="no-tasks-message"></div>
     <ul id="task-list"></ul>
     <div id="end-of-list-message"></div>
 
-
-
-    <br>
-    <br>
+    <br><br>
     <footer>
       <p>All tasks are saved on this device only.</p>
       <a href="./faq.html#feedback_contact">Give feedback</a>. |
       <a href="./faq.html">FAQ</a>. |
-      <a href="https://github.com/OWelton-Rosie/homework-planner" target="_blank">GitHub</a>.  
-      <br>
-      <br>
+      <a href="https://github.com/OWelton-Rosie/homework-planner" target="_blank">GitHub</a>  
+      <br><br>
       Written by <a href="https://owelton-rosie.pages.dev" target="_blank">Oscar Welton-Rosie</a>.
     </footer>
   </div>
