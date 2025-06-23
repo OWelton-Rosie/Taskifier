@@ -4,6 +4,7 @@ This is the repo for <a href="https://homework-planner.pages.dev">https://homewo
 ## Features
 - Ability to create and list an unlimited amount of tasks.
 - Ability to search for and filter tasks in various ways (due date, priority level, alphabetical order).
+- Import/export functionality via `.json`. 
 - Option to download a `.txt` file with all the tasks.
 
 # Development
