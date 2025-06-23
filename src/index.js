@@ -4,6 +4,9 @@ const searchInput = document.getElementById("search");
 const filterCategory = document.getElementById("filter-category");
 const sortBySelect = document.getElementById("sort-by");
 const exportBtn = document.getElementById("export-tasks");
+const exportJsonBtn = document.getElementById("export-json");
+const importJsonBtn = document.getElementById("import-json-btn");
+const importJsonInput = document.getElementById("import-json");
 const submitBtn = taskForm.querySelector("button[type='submit']");
 const cancelBtn = document.getElementById("cancel-edit");
 const noTasksMessageBox = document.getElementById("no-tasks-message");
@@ -265,7 +268,50 @@ function exportTasks() {
   URL.revokeObjectURL(url);
 }
 
+function exportTasksAsJson() {
+  if (tasks.length === 0) {
+    alert("No tasks to export!");
+    return;
+  }
+
+  const jsonBlob = new Blob([JSON.stringify(tasks, null, 2)], {
+    type: "application/json"
+  });
+
+  const url = URL.createObjectURL(jsonBlob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "homework_tasks.json";
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function importTasksFromJson(file) {
+  const reader = new FileReader();
+  reader.onload = function (e) {
+    try {
+      const imported = JSON.parse(e.target.result);
+      if (!Array.isArray(imported)) throw new Error("Invalid format");
+
+      if (!confirm("Replace current tasks with imported ones?")) return;
+
+      tasks = imported;
+      saveTasks();
+      renderTasks();
+    } catch (err) {
+      alert("Failed to import tasks: " + err.message);
+    }
+  };
+  reader.readAsText(file);
+}
+
 exportBtn.addEventListener("click", exportTasks);
+exportJsonBtn.addEventListener("click", exportTasksAsJson);
+importJsonBtn.addEventListener("click", () => importJsonInput.click());
+importJsonInput.addEventListener("change", e => {
+  const file = e.target.files[0];
+  if (file) importTasksFromJson(file);
+});
 
 fetch('messages.json')
   .then(response => response.json())
