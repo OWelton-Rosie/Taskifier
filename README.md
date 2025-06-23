@@ -5,7 +5,7 @@ This is the repo for <a href="https://homework-planner.pages.dev">https://homewo
 - Ability to create and list an unlimited amount of tasks.
 - Ability to search for and filter tasks in various ways (due date, priority level, alphabetical order).
 - Import/export functionality via `.json`. 
-- Option to download a `.txt` file with all the tasks.
+- Option to download a `.txt` or a `.json` file with all the tasks.
 
 # Development
 ## Running the project locally
@@ -36,8 +36,8 @@ http://localhost:8000/src
 If you're using VSCode, install the [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) extension, then right-click on `index.html` and select "Open with Live Server".
 
 # Todo
-- Add `.json` export functionality
-- Add import functionality via `.json`
+- ~~Add `.json` export functionality~~
+- ~~Add import functionality via `.json`~~
 
 
 
