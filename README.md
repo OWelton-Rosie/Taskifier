@@ -8,7 +8,7 @@ This is the repo for <a href="https://homework-planner.pages.dev">https://homewo
 
 # Development
 ## Running the project locally
-Due to security restrictions, browsers will not load the custom "no tasks left" messages (found in [`messages.json`](https://github.com/OWelton-Rosie/homework-planner/blob/main/src/messages.json)). To get around this, either:
+Due to security restrictions, browsers will not load the custom "no tasks left" messages (found in [`messages.json`](https://github.com/OWelton-Rosie/homework-planner/blob/main/src/messages.json)). To get around this, you have two options:
 
 ### Option 1: create the server with Python
 ```
@@ -33,6 +33,10 @@ http://localhost:8000/src
 ### Option 2: using Live Server (VS Code only)
 
 If you're using VSCode, install the [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) extension, then right-click on `index.html` and select "Open with Live Server".
+
+# Todo
+- Add `.json` export functionality
+- Add import functionality via `.json`
 
 
 
