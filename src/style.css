@@ -1,3 +1,4 @@
+
 body {
   font-family: 'Arial', sans-serif;
   background: #f4f4f9;
@@ -117,4 +118,8 @@ a:hover,
 a:visited:hover {
   color: #0f98ba;
   text-decoration: none;
+}
+
+.export-json-text p{
+  font-size: 0.8rem;
 }
