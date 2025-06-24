@@ -105,16 +105,21 @@ function renderTasks() {
           })} (${daysLeft} day${daysLeft === 1 ? '' : 's'} left)`
         : "No deadline";
 
+      const completionText = task.doneAt
+        ? `✅ Completed: ${new Date(task.doneAt).toLocaleString()}`
+        : "";
+
       const originalIndex = tasks.indexOf(task);
 
       li.innerHTML = `
         <div class="task-header">
           <strong>${task.name}</strong>
-          <span>${taskCategory || "No category"}</span>
+          <span class="category-tag">${taskCategory || "No category"}</span>
         </div>
         <div class="task-meta">
           <span class="deadline">${deadlineText}</span>
           <span class="priority">${task.priority ? task.priority.charAt(0).toUpperCase() + task.priority.slice(1) : "None"}</span>
+          ${task.done ? `<span class="done-at">${completionText}</span>` : ""}
         </div>
         <div class="task-actions">
           <button onclick="toggleDone(${originalIndex})">${task.done ? "Mark as incomplete" : "Mark as completed"}</button>
@@ -162,7 +167,29 @@ function updateCategoryFilter(categories) {
 }
 
 function toggleDone(index) {
-  tasks[index].done = !tasks[index].done;
+  const task = tasks[index];
+  task.done = !task.done;
+  task.doneAt = task.done ? new Date().toISOString() : null;
+
+  if (task.done && task.repeat && task.deadline) {
+    const oldDate = new Date(task.deadline);
+    let newDate;
+    if (task.repeat === "daily") {
+      newDate = new Date(oldDate.setDate(oldDate.getDate() + 1));
+    } else if (task.repeat === "weekly") {
+      newDate = new Date(oldDate.setDate(oldDate.getDate() + 7));
+    }
+
+    if (newDate) {
+      tasks.push({
+        ...task,
+        deadline: newDate.toISOString().slice(0, 16),
+        done: false,
+        doneAt: null
+      });
+    }
+  }
+
   saveTasks();
   renderTasks();
 }
@@ -185,6 +212,7 @@ function editTask(index) {
   document.getElementById("task-deadline-time").value = timePart || "";
 
   document.getElementById("task-priority").value = task.priority;
+  document.getElementById("task-repeat").value = task.repeat || "";
 
   isEditing = true;
   editIndex = index;
@@ -211,6 +239,7 @@ taskForm.addEventListener("submit", e => {
   const time = document.getElementById("task-deadline-time").value;
   const deadline = date && time ? `${date}T${time}` : date || "";
   const priority = document.getElementById("task-priority").value.trim().toLowerCase();
+  const repeat = document.getElementById("task-repeat").value;
 
   if (!name) return;
 
@@ -219,7 +248,9 @@ taskForm.addEventListener("submit", e => {
     category,
     deadline,
     priority,
-    done: false
+    repeat,
+    done: false,
+    doneAt: null
   };
 
   if (isEditing && editIndex !== null) {
@@ -254,6 +285,7 @@ function exportTasks() {
       `Category: ${task.category || "None"}`,
       `Deadline: ${task.deadline || "None"}`,
       `Priority: ${task.priority || "None"}`,
+      `Repeat: ${task.repeat || "None"}`,
       `Status: ${task.done ? "Done" : "Not done"}`,
       "--------------------------"
     ].join("\n");
@@ -311,6 +343,17 @@ importJsonBtn.addEventListener("click", () => importJsonInput.click());
 importJsonInput.addEventListener("change", e => {
   const file = e.target.files[0];
   if (file) importTasksFromJson(file);
+});
+
+document.addEventListener("keydown", e => {
+  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "f") {
+    e.preventDefault();
+    searchInput.focus();
+  }
+  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "n") {
+    e.preventDefault();
+    document.getElementById("task-name").focus();
+  }
 });
 
 fetch('messages.json')
