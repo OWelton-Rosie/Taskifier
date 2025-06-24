@@ -99,7 +99,7 @@ function renderTasks() {
         : null;
 
       const deadlineText = dateObj
-        ? `Due ${dateObj.toLocaleString(undefined, {
+        ? `${dateObj.toLocaleString(undefined, {
             dateStyle: "medium",
             timeStyle: "short"
           })} (${daysLeft} day${daysLeft === 1 ? '' : 's'} left)`
@@ -117,8 +117,9 @@ function renderTasks() {
           <span class="category-tag">${taskCategory || "No category"}</span>
         </div>
         <div class="task-meta">
-          <span class="deadline">${deadlineText}</span>
-          <span class="priority">${task.priority ? task.priority.charAt(0).toUpperCase() + task.priority.slice(1) : "None"}</span>
+          <span class="deadline">Due: ${deadlineText}</span>
+          <br>
+          <span class="priority">Priority: ${task.priority ? task.priority.charAt(0).toUpperCase() + task.priority.slice(1) : "None"}</span>
           ${task.done ? `<span class="done-at">${completionText}</span>` : ""}
         </div>
         <div class="task-actions">
