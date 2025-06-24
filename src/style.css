@@ -123,3 +123,10 @@ a:visited:hover {
 .export-json-text p{
   font-size: 0.8rem;
 }
+
+.done-at {
+  display: block;
+  font-size: 0.8em;
+  color: #444;
+  margin-top: 4px;
+}
