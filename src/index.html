@@ -6,12 +6,6 @@
   <title>Homework Planner</title>
   <link rel="stylesheet" href="./style.css">
   <link rel="icon" type="image/x-icon" href="./favicon.jpeg">
-
-  <style>
-    .main-content {
-      display: none;
-    }
-  </style>
 </head>
 <body>
 
@@ -32,14 +26,13 @@
 
     <!-- Form to add a new task -->
     <form id="task-form">
-      <input id="task-name" type="text" placeholder="Task name" required>
-      <input id="task-category" type="text" placeholder="Category (e.g., English)">
+      <input id="task-name" type="text" placeholder="Task name" required aria-label="Task name">
+      <input id="task-category" type="text" placeholder="Category (e.g., English)" aria-label="Task category">
       
-      <input id="task-deadline" type="date">
+      <input id="task-deadline" type="date" aria-label="Deadline date">
+      <input id="task-deadline-time" type="time" aria-label="Deadline time">
 
-      <input id="task-deadline-time" type="time">
-
-      <select id="task-priority" name="priority">
+      <select id="task-priority" name="priority" aria-label="Task priority">
         <option value="" disabled selected hidden>Select priority level</option>
         <option value="">None</option>
         <option value="high">High</option>
@@ -47,7 +40,14 @@
         <option value="low">Low</option>
       </select>
 
-      <button type="submit">Add task</button>
+      <!-- New repeat select -->
+      <select id="task-repeat" aria-label="Repeat frequency">
+        <option value="" selected>No repeat</option>
+        <option value="daily">Repeat daily</option>
+        <option value="weekly">Repeat weekly</option>
+      </select>
+
+      <button type="submit" aria-label="Add task">Add task</button>
       <button type="button" id="cancel-edit" style="display: none;">Cancel</button>
     </form>
 
@@ -56,11 +56,11 @@
 
     <!-- Controls for searching, filtering, and sorting tasks -->
     <div class="controls">
-      <input id="search" type="text" placeholder="Search tasks...">
-      <select id="filter-category">
+      <input id="search" type="text" placeholder="Search tasks..." aria-label="Search tasks">
+      <select id="filter-category" aria-label="Filter by category">
         <option value="" selected>All categories</option>
       </select>
-      <select id="sort-by">
+      <select id="sort-by" aria-label="Sort tasks">
         <option value="due-asc">Due date (closest first)</option>
         <option value="due-desc">Due date (furthest first)</option>
         <option value="priority-asc">Priority (high to low)</option>
@@ -75,14 +75,13 @@
     <button id="export-json">Export tasks as JSON</button>
 
     <div class="export-json-text">
-    <p><a href="./faq.html#json-import-export">Why would I want to export my tasks as JSON?</a></p>
+      <p><a href="./faq.html#json-import-export">Why would I want to export my tasks as JSON?</a></p>
     </div>
 
     <br>
 
     <input type="file" id="import-json" accept=".json" style="display: none;">
     <button id="import-json-btn">Import from JSON</button>
-
 
     <br><br>
     <h1>All tasks</h1>
