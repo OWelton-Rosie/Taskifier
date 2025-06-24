@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Homework Planner</title>
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./css/style.css">
   <link rel="icon" type="image/x-icon" href="./favicon.jpeg">
 </head>
 <body>
@@ -69,7 +69,7 @@
     </div>
 
     <hr>
-    <button id="export-tasks">Download tasks</button>
+    <button id="export-tasks">Download tasks (txt)</button>
     <button id="export-json">Export tasks as JSON</button>
 
     <div class="export-json-text">
@@ -79,7 +79,7 @@
     <br>
 
     <input type="file" id="import-json" accept=".json" style="display: none;">
-    <button id="import-json-btn">Import from JSON</button>
+    <button id="import-json-btn">Import tasks from JSON</button>
 
     <br><br>
     <h1>All tasks</h1>
@@ -103,6 +103,6 @@
     // JS is enabled, show the main content
     document.querySelector('.main-content').style.display = 'block';
   </script>
-  <script src="index.js"></script>
+<script src="./index.js"></script>
 </body>
 </html>
