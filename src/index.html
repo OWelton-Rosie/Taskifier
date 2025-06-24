@@ -16,7 +16,8 @@
     </div>
   </noscript>
 
-  <div class="main-content">
+  <!-- Hidden by default; only shown if JS is enabled -->
+  <div class="main-content" style="display: none;">
     <header>
       <h1>Homework planner/tracker</h1>
     </header>
@@ -24,7 +25,6 @@
     <br>
     <h1>Add a new task</h1>
 
-    <!-- Form to add a new task -->
     <form id="task-form">
       <input id="task-name" type="text" placeholder="Task name" required aria-label="Task name">
       <input id="task-category" type="text" placeholder="Category (e.g., English)" aria-label="Task category">
@@ -40,7 +40,6 @@
         <option value="low">Low</option>
       </select>
 
-      <!-- New repeat select -->
       <select id="task-repeat" aria-label="Repeat frequency">
         <option value="" selected>No repeat</option>
         <option value="daily">Repeat daily</option>
@@ -54,7 +53,6 @@
     <hr>
     <h1>Search for a task</h1>
 
-    <!-- Controls for searching, filtering, and sorting tasks -->
     <div class="controls">
       <input id="search" type="text" placeholder="Search tasks..." aria-label="Search tasks">
       <select id="filter-category" aria-label="Filter by category">
