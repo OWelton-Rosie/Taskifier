@@ -45,6 +45,21 @@ function saveTasks() {
   localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
+function formatTimeDifference(diffMs) {
+  const absMs = Math.abs(diffMs);
+  const minutes = Math.floor(absMs / (1000 * 60));
+  const hours = Math.floor(absMs / (1000 * 60 * 60));
+  const days = Math.floor(absMs / (1000 * 60 * 60 * 24));
+
+  if (minutes < 60) {
+    return `${minutes} minute${minutes === 1 ? '' : 's'}`;
+  } else if (hours < 24) {
+    return `${hours} hour${hours === 1 ? '' : 's'}`;
+  } else {
+    return `${days} day${days === 1 ? '' : 's'}`;
+  }
+}
+
 function renderTasks() {
   taskList.innerHTML = "";
   clearMessage(noTasksMessageBox);
@@ -94,16 +109,35 @@ function renderTasks() {
       if (task.done) li.classList.add("done");
 
       const dateObj = task.deadline ? new Date(task.deadline) : null;
-      const daysLeft = dateObj
-        ? Math.ceil((dateObj - new Date()) / (1000 * 60 * 60 * 24))
-        : null;
+      let deadlineText = "No deadline";
 
-      const deadlineText = dateObj
-        ? `${dateObj.toLocaleString(undefined, {
-            dateStyle: "medium",
-            timeStyle: "short"
-          })} (${daysLeft} day${daysLeft === 1 ? '' : 's'} left)`
-        : "No deadline";
+      if (dateObj) {
+        const now = new Date();
+        const diff = dateObj - now;
+        const formattedDiff = formatTimeDifference(diff);
+        const timePart = dateObj.toLocaleString(undefined, {
+          dateStyle: "medium",
+          timeStyle: "short"
+        });
+
+        if (task.done) {
+          if (diff < 0) {
+            deadlineText = `${timePart} (was due ${formattedDiff} ago)`;
+          } else if (diff === 0) {
+            deadlineText = `${timePart} (was due today)`;
+          } else {
+            deadlineText = `${timePart} (was due in ${formattedDiff})`;
+          }
+        } else {
+          if (diff > 0) {
+            deadlineText = `${timePart} (due in ${formattedDiff})`;
+          } else if (diff === 0) {
+            deadlineText = `${timePart} (due today)`;
+          } else {
+            deadlineText = `${timePart} (${formattedDiff} overdue)`;
+          }
+        }
+      }
 
       const completionText = task.doneAt
         ? `✅ Completed: ${new Date(task.doneAt).toLocaleString()}`
