@@ -38,6 +38,7 @@ http://localhost:8000/src
 If you're using VSCode, install the [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) extension, then right-click on `index.html` and select "Open with Live Server".
 
 # Todo
+- Choose and add a license
 - ~~Add `.json` export functionality~~
 - ~~Add import functionality via `.json`~~
 
