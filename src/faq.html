@@ -2,68 +2,64 @@
 <html lang="en-NZ">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FAQ - Homework Planner</title>
-  <link rel="stylesheet" href="./css/style.css"> 
-  <link rel="stylesheet" href="./css/faq.css">
-  <link rel="icon" href="favicon.jpeg" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About this app</title>
 
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./scripts/logic.js"></script>
+  <link rel="icon" type="image/x-icon" href="/assets/WHS_logo.png">
+
+
+  <style>
+    .js-required {
+      display: none;
+    }
+
+    iframe.license-frame {
+      width: 100%;
+      height: 450px;
+      border: 1px solid #ccc;
+      margin-top: 2rem;
+    }
+  </style>
 </head>
 <body>
-  <a href="index.html" class="back-link">← Back to the planner</a>
+  <noscript>
+    <div style="padding: 2rem; font-size: 1.2rem;">
+      You need to enable JavaScript to run this app. <a href="https://www.browserstack.com/guide/how-to-enable-javascript-in-browser" target="_blank" rel="noopener noreferrer">How?</a>
+    </div>
+  </noscript>
 
-  <br>
+  <div class="js-required">
+    <p><a href="./index.html">Back to the homepage</a></p>
 
-  <h1>Frequently Asked Questions</h1>
+    <h1>About this app</h1>
+    <p>This app exists as a convenience tool for WHS students, parents, and teachers. After my family and I struggled with the WHS stationery list, I decided to create an app that would help others in my position.</p>
 
-  <div class="faq-item">
-    <h2>How do I add a new task?</h2>
-    <p>Use the form at the top of the homepage. Enter a name, optional category, deadline, and priority. Then click "Add task".</p>
-  </div>
+    <p>This app is not affiliated with Wellington High School. It exists solely as a convenience tool. If you're interested in using this app for your school or club, feel free to <a href="https://oweltonrosie.com/contact" target="_blank">contact me</a>, and I can help with setup. Alternately, if you are a developer, I have written some installation documentation</p>
 
-  <div class="faq-item">
-    <h2>Can I edit a task after creating it?</h2>
-    <p>Yes! Click the "Edit task" button below a task. The form will fill with that task's details so you can make changes.</p>
-  </div>
 
-  <div class="faq-item">
-    <h2>What happens when I mark a task as completed?</h2>
-    <p>The task gets visually updated and is pushed to the bottom of the list. You can undo it by clicking "Mark as incomplete".</p>
+      <h2>Privacy</h2>
+      <p>This app does not collect any data, "personal" or otherwise. The source code of this app can be found on <a href="https://github.com/OWelton-Rosie/stationery" target="_blank">GitHub</a> for independant verification.</p>
 
-    <p>If you want to remove a task from the list, simply press the "Delete task" button. Note that once a task is deleted, it <strong>cannot</strong> be recovered!</p>
-  </div>
+      <h2>License</h2>
+      <p>This software is licensed under the GNU General Public License v3.0. The full license is available below, however the important terms are summarised for brevity.</p>
 
-  <div class="faq-item">
-    <h2>Where is my data saved?</h2>
-    <p>Your tasks are saved in your browser's local storage. This means they stay on your device, even if you reload the page. However, they won't sync across devices or browsers.</p>
+      <ul class="license-summary">
+        <li><strong>Freedom to Use:</strong> You can use this software for any purpose.</li>
+        <li><strong>Freedom to Modify:</strong> You can study and change the source code.</li>
+        <li><strong>Freedom to Share:</strong> You can redistribute the software and your modifications.</li>
+        <li><strong>Share Alike:</strong> If you distribute modified versions, you must also license them under GPL v3.</li>
+        <li><strong>No Warranty:</strong> This software comes without any warranty, to the extent permitted by law.</li>
+      </ul>
+      
+      <iframe class="license-frame" src="./assets/license.txt" title="GNU General Public License v3.0"></iframe>
+        </div>
 
-    <p>However, you can <a href="#json-import-export">export your tasks as a JSON</a> and import them later to prevent losing your tasks.</p>
-  </div>
-
-  <div class="faq-item">
-    <h2>Can I download a file containing my tasks?</h2>
-    <p>Yes! Click the "Download tasks" button to download your task list as a plain text file. You can also click the "Export tasks as JSON" button to download your tasks as a JSON file.</p>
-  </div>
-
-  <div class="faq-item">
-    <h2 id="json-import-export">What's the point of exporting my tasks as a JSON file?</h2>
-    <p>A JSON file stores your tasks in a structured format that's easy for computers to read. Exporting to JSON lets you import your taks into the planner later. It keeps all task details like deadlines, categories, and completion status.</p>
-  </div>
-
-  <div class="faq-item">
-    <h2>How do I search or filter tasks?</h2>
-    <p>Use the search bar to filter by name or category. You can also filter by category using the "All categories" dropdown menu.<p>
-    <p>The dropdown menu on the right of the page also allows you to filter tasks by due date, priority and alphabetical order.</p>
-  </div>
-
-  <div class="faq-item">
-    <h2 id="feedback_contact">What if I have more questions or want to give feedback?</h2>
-    <p>If you have any feedback (good or bad), you can contact me via the email listed on my <a href="https://owelton-rosie.pages.dev/contact" target="_blank">website</a>.<p>
-    <p>If you are interested in viewing this app's source code, it can be viewed on <a href="https://github.com/OWelton-Rosie/homework-planner" target="_blank">GitHub</a>.</p>
-  </div>
-
-  <footer>
-    Written by <a href="https://oweltonrosie.com" target="_blank">Oscar Welton-Rosie</a>.
-  </footer>
+  <script>
+    document.querySelectorAll('.js-required').forEach(el => {
+      el.style.display = 'block';
+    });
+  </script>
 </body>
 </html>
