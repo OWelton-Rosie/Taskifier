@@ -1,4 +1,4 @@
-# Homework planner/tracker 
+# Taskifier
 This is the repo for <a href="https://homework.oweltonrosie.com">https://homework.oweltonrosie.com</a>.
 
 ## Features
