@@ -1,5 +1,5 @@
 # Homework planner/tracker 
-This is the repo for <a href="https://homework-planner.pages.dev">https://homework-planner.pages.dev/</a>.
+This is the repo for <a href="https://homework.oweltonrosie.com">https://homework.oweltonrosie.com</a>.
 
 ## Features
 - Ability to create and list an unlimited amount of tasks.
