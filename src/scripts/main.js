@@ -71,15 +71,22 @@ taskForm.addEventListener("submit", e => {
   const priority = document.getElementById("task-priority").value.trim().toLowerCase();
   const repeat = document.getElementById("task-repeat").value;
 
-  const newTask = { name, category, deadline, priority, repeat, done: false, doneAt: null };
-
   if (isEditing && editIndex !== null) {
-    tasks[editIndex] = newTask;
+    // EDIT existing task — preserve done & doneAt
+    const task = tasks[editIndex];
+    task.name = name;
+    task.category = category;
+    task.deadline = deadline;
+    task.priority = priority;
+    task.repeat = repeat;
+
     isEditing = false;
     editIndex = null;
     submitBtn.textContent = "Add Task";
     cancelBtn.style.display = "none";
   } else {
+    // NEW task
+    const newTask = { name, category, deadline, priority, repeat, done: false, doneAt: null };
     tasks.push(newTask);
   }
 
