@@ -1,5 +1,5 @@
 # Taskifier
-This is the repo for <a href="https://homework.oweltonrosie.com">https://homework.oweltonrosie.com</a>.
+This is the repo for <a href="https://taskifier.oweltonrosie.com">https://taskifier.oweltonrosie.com</a>.
 
 ## Features
 - Ability to create and list an unlimited amount of tasks.
@@ -9,11 +9,11 @@ This is the repo for <a href="https://homework.oweltonrosie.com">https://homewor
 
 # Development
 ## Running the project locally
-Due to security restrictions, browsers will not load the custom "no tasks left" messages (found in [`src/messages.json`](https://github.com/OWelton-Rosie/homework-planner/blob/main/src/messages.json)). To get around this, build the server with Python.
+Due to security restrictions, browsers will not load the custom "no tasks left" messages (found in [`src/messages.json`](https://github.com/OWelton-Rosie/taskifier/blob/main/src/messages.json)). To get around this, build the server with Python.
 
 Clone the repo:
 ```
-git clone https://github.com/OWelton-Rosie/homework-planner
+git clone https://github.com/OWelton-Rosie/taskifer
 ```
 Navigate to the project:
 ```
@@ -32,13 +32,8 @@ Then navigate to:
 
 http://localhost:8000/src
 
-An example JSON containing some tasks can be found at [`src/dev_tasks.json`](https://github.com/OWelton-Rosie/homework-planner/blob/main/src/dev_tasks.json)
+An example JSON containing some tasks can be found at [`src/dev_tasks.json`](https://github.com/OWelton-Rosie/taskifer/blob/main/src/dev_tasks.json)
 
-# Todo
-- ~~Stop src/index.js being a god file~~
-- ~~Choose and add a license~~
-- ~~Add `.json` export functionality~~
-- ~~Add import functionality via `.json`~~
 
 
 
