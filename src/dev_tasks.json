@@ -40,7 +40,7 @@
     "category": "App",
     "deadline": "2025-09-14T20:28",
     "priority": "medium",
-    "repeat": "daily",
+    "repeat": "",
     "done": false,
     "doneAt": null
   }

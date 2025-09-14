@@ -77,13 +77,15 @@ export function renderTasks(tasks, elements, noTasksMessages, callbacks) {
 
   sortedTasks.forEach((task, index) => {
     const taskCategory = task.category || "";
-    if ((task.name.toLowerCase().includes(search) || taskCategory.toLowerCase().includes(search)) &&
-        (!categoryFilterValue || taskCategory === categoryFilterValue)) {
+    const matchesSearch = task.name.toLowerCase().includes(search) || taskCategory.toLowerCase().includes(search);
+    const matchesCategory = !categoryFilterValue || taskCategory === categoryFilterValue;
+
+    if (matchesSearch && matchesCategory) {
       visibleCount++;
 
       const li = document.createElement("li");
       li.classList.add(`priority-${task.priority?.toLowerCase() || "none"}`);
-      if (task.done) li.classList.add("done");
+      if (task.done) li.classList.add("done"); // keep strikethrough
 
       // Deadline text
       let deadlineText = "No deadline";
@@ -95,14 +97,17 @@ export function renderTasks(tasks, elements, noTasksMessages, callbacks) {
         const timePart = dateObj.toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" });
 
         if (task.done) {
-          deadlineText = diff < 0 ? `${timePart} (was due ${formattedDiff} ago)` : `${timePart} (was due in ${formattedDiff})`;
+          deadlineText = diff < 0
+            ? `${timePart} (was due ${formattedDiff} ago)`
+            : `${timePart} (was due in ${formattedDiff})`;
         } else {
-          deadlineText = diff > 0 ? `${timePart} (due in ${formattedDiff})` : `${timePart} (${formattedDiff} overdue)`;
+          deadlineText = diff > 0
+            ? `${timePart} (due in ${formattedDiff})`
+            : `${timePart} (${formattedDiff} overdue)`;
         }
       }
 
-      const liContent = document.createElement("div");
-      liContent.innerHTML = `
+      li.innerHTML = `
         <div class="task-header">
           <strong>${task.name}</strong>
           <span class="category-tag">${taskCategory || "No category"}</span>
@@ -120,7 +125,6 @@ export function renderTasks(tasks, elements, noTasksMessages, callbacks) {
         </div>
       `;
 
-      li.appendChild(liContent);
       taskList.appendChild(li);
 
       // Attach callbacks
@@ -130,11 +134,18 @@ export function renderTasks(tasks, elements, noTasksMessages, callbacks) {
     }
   });
 
-  // No tasks message
-  if (visibleCount === 0) {
-    const msg = search ? `No tasks found for "${search}"` : (noTasksMessages[Math.floor(Math.random() * noTasksMessages.length)] || "🎉 No tasks left!");
+  // Display messages using noTasksMessages
+  if (tasks.length === 0) {
+    const msg = noTasksMessages[Math.floor(Math.random() * noTasksMessages.length)] || "🎉 No tasks yet!";
     applyMessageStyle(noTasksMessageBox, msg);
-  } else {
-    applyMessageStyle(endOfListMessage, "📦 Looks like you've reached the end.");
+  } else if (visibleCount === 0) {
+    const msg = search ? `No tasks found for "${search}"` : "No tasks match your filter";
+    applyMessageStyle(noTasksMessageBox, msg);
+  } else if (tasks.every(t => t.done)) {
+    const msg = noTasksMessages[Math.floor(Math.random() * noTasksMessages.length)] || "🎉 All tasks complete! Great job!";
+    applyMessageStyle(noTasksMessageBox, msg);
   }
+
+  // ALWAYS show end-of-list message
+  applyMessageStyle(endOfListMessage, "📦 Looks like you've reached the end.");
 }

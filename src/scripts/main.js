@@ -3,7 +3,7 @@ import { toggleDone } from "./tasks.js";
 import { renderTasks } from "./ui.js";
 
 let tasks = loadTasks();
-let noTasksMessages = [];
+let noTasksMessages = ["🎉 No tasks left!"]; // fallback so renderTasks can work immediately
 let isEditing = false;
 let editIndex = null;
 
@@ -142,12 +142,19 @@ document.addEventListener("keydown", e => {
 });
 
 // -----------------
-// Initial load
+// Load noTasksMessages from messages.json (async, doesn't block render)
 // -----------------
-fetch("messages.json")
-  .then(r => r.json())
+fetch("./messages.json")
+  .then(res => res.json())
   .then(data => {
-    noTasksMessages = data.noTasksMessages || [];
-    renderTasks(tasks, elements, noTasksMessages, callbacks);
+    if (data.noTasksMessages && Array.isArray(data.noTasksMessages)) {
+      noTasksMessages = data.noTasksMessages;
+      renderTasks(tasks, elements, noTasksMessages, callbacks);
+    }
   })
-  .catch(() => renderTasks(tasks, elements, noTasksMessages, callbacks));
+  .catch(err => console.error("Failed to load messages.json", err));
+
+// -----------------
+// Initial render (fallback)
+// -----------------
+renderTasks(tasks, elements, noTasksMessages, callbacks);
