@@ -34,14 +34,5 @@
     "repeat": "",
     "done": false,
     "doneAt": null
-  },
-  {
-    "name": "Repeating task",
-    "category": "App",
-    "deadline": "2025-09-14T20:28",
-    "priority": "medium",
-    "repeat": "",
-    "done": false,
-    "doneAt": null
   }
 ]
