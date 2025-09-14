@@ -1,4 +1,5 @@
-import { loadTasks, saveTasks, exportAsText, exportAsJson, importFromJson } from "./storage.js";
+import { loadTasks, saveTasks, importFromJson } from "./storage.js";
+import { exportAsText, exportAsJson } from "./download.js";
 import { toggleDone } from "./tasks.js";
 import { renderTasks } from "./ui.js";
 
