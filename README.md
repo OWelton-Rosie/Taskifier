@@ -32,7 +32,7 @@ Then navigate to:
 
 http://localhost:8000/src
 
-An example JSON containing some tasks can be found at [`src/dev_tasks.json`](https://github.com/OWelton-Rosie/taskifer/blob/main/src/dev_tasks.json)
+An example JSON containing some tasks can be found at [`src/dev_tasks.json`](https://github.com/OWelton-Rosie/Taskifier/blob/main/src/dev_tasks.json)
 
 
 
