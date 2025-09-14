@@ -2,8 +2,8 @@ import { loadTasks, saveTasks, exportAsText, exportAsJson, importFromJson } from
 import { toggleDone } from "./tasks.js";
 import { renderTasks } from "./ui.js";
 
-let tasks = loadTasks();
-let noTasksMessages = ["🎉 No tasks left!"]; // fallback so renderTasks can work immediately
+let tasks = loadTasks().map(t => { delete t.repeat; return t; });
+let noTasksMessages = ["🎉 No tasks left!"];
 let isEditing = false;
 let editIndex = null;
 
@@ -32,13 +32,10 @@ const callbacks = {
   onEdit: (task, index) => {
     document.getElementById("task-name").value = task.name;
     document.getElementById("task-category").value = task.category;
-
     const [datePart, timePart] = task.deadline?.split("T") || ["", ""];
     document.getElementById("task-deadline").value = datePart;
     document.getElementById("task-deadline-time").value = timePart || "";
-
     document.getElementById("task-priority").value = task.priority || "";
-    document.getElementById("task-repeat").value = task.repeat || "";
 
     isEditing = true;
     editIndex = index;
@@ -69,24 +66,20 @@ taskForm.addEventListener("submit", e => {
   const time = document.getElementById("task-deadline-time").value;
   const deadline = date && time ? `${date}T${time}` : date || "";
   const priority = document.getElementById("task-priority").value.trim().toLowerCase();
-  const repeat = document.getElementById("task-repeat").value;
 
   if (isEditing && editIndex !== null) {
-    // EDIT existing task — preserve done & doneAt
     const task = tasks[editIndex];
     task.name = name;
     task.category = category;
     task.deadline = deadline;
     task.priority = priority;
-    task.repeat = repeat;
 
     isEditing = false;
     editIndex = null;
     submitBtn.textContent = "Add Task";
     cancelBtn.style.display = "none";
   } else {
-    // NEW task
-    const newTask = { name, category, deadline, priority, repeat, done: false, doneAt: null };
+    const newTask = { name, category, deadline, priority, done: false, doneAt: null };
     tasks.push(newTask);
   }
 
@@ -126,7 +119,7 @@ document.getElementById("import-json").addEventListener("change", e => {
   if (file) {
     importFromJson(file, imported => {
       if (confirm("Replace current tasks with imported ones?")) {
-        tasks = imported;
+        tasks = imported.map(t => { delete t.repeat; return t; });
         saveTasks(tasks);
         renderTasks(tasks, elements, noTasksMessages, callbacks);
       }
@@ -162,6 +155,6 @@ fetch("./messages.json")
   .catch(err => console.error("Failed to load messages.json", err));
 
 // -----------------
-// Initial render (fallback)
+// Initial render
 // -----------------
 renderTasks(tasks, elements, noTasksMessages, callbacks);

@@ -14,20 +14,5 @@ export function formatTimeDifference(diffMs) {
 export function toggleDone(task, tasks) {
   task.done = !task.done;
   task.doneAt = task.done ? new Date().toISOString() : null;
-
-  if (task.done && task.repeat && task.deadline) {
-    const oldDate = new Date(task.deadline);
-    let newDate;
-    if (task.repeat === "daily") newDate = new Date(oldDate.setDate(oldDate.getDate() + 1));
-    if (task.repeat === "weekly") newDate = new Date(oldDate.setDate(oldDate.getDate() + 7));
-
-    if (newDate) {
-      tasks.push({
-        ...task,
-        deadline: newDate.toISOString().slice(0, 16),
-        done: false,
-        doneAt: null
-      });
-    }
-  }
+  // Repeating logic removed
 }
