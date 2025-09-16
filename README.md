@@ -9,15 +9,11 @@ This is the repo for <a href="https://taskifier.oweltonrosie.com">https://taskif
 
 # Development
 ## Running the project locally
-Due to security restrictions, browsers will not load the custom "no tasks left" messages (found in [`src/messages.json`](https://github.com/OWelton-Rosie/taskifier/blob/main/src/messages.json)). To get around this, build the server with Python.
+Due to security restrictions, browsers will not load the custom "no tasks left" messages (found in [`src/messages.json`](https://github.com/OWelton-Rosie/taskifier/blob/main/src/messages.json)) in a `file://` URL. To get around this, build the server with Python.
 
-Clone the repo:
+First, clone the repo and navigate to the project:
 ```
-git clone https://github.com/OWelton-Rosie/taskifer
-```
-Navigate to the project:
-```
-cd homework-planner
+git clone https://github.com/OWelton-Rosie/taskifer && cd taskifier
 ```
 If you're using Python 3:
 ```
